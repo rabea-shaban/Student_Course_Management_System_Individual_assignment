@@ -1,7 +1,7 @@
 # 🎓 Student Course Management System
 
-A simple **C++ console-based application** for managing students and their enrolled courses.  
-The project demonstrates core **Object-Oriented Programming (OOP)** concepts and usage of the **Standard Template Library (STL)**.
+A console-based **Student Course Management System** developed using **C++**.  
+This project demonstrates the use of **Object-Oriented Programming (OOP)** and **Standard Template Library (STL)** to manage students and their enrolled courses efficiently.
 
 ---
 
@@ -9,102 +9,112 @@ The project demonstrates core **Object-Oriented Programming (OOP)** concepts and
 
 This system allows users to:
 
-- Add and remove students
-- Search for a student by ID
-- Enroll students in courses
+- Add new students
+- Remove existing students
+- Search students by ID
 - Display all students
-- Show courses for a specific student
-- Sort students by GPA
+- Enroll students in courses
+- Show student courses
+- Sort students based on GPA
 
 ---
 
-## 🏗️ Project Structure
+## 🧩 UML Class Diagram
 
-```
+```mermaid
+classDiagram
 
-📁 Student_Course_Management_System
-│── Person.h / Person.cpp
-│── Student.h / Student.cpp
-│── main.cpp
+class Person {
+  - string name
+  + Person(string n)
+  + getName() string
+}
 
+class Student {
+  - int id
+  - double gpa
+  - set<string> courses
+  + Student(int i, string n, double g)
+  + getId() int
+  + getGpa() double
+  + addCourse(string course)
+  + showCourses()
+  + display()
+}
+
+class System {
+  - vector<Student> students
+  + addStudent()
+  + removeStudent(id)
+  + findStudent(id) Student*
+  + displayAll()
+  + sortStudents()
+}
+
+Person <|-- Student
+System --> Student : manages
 ````
+
+---
+
+## 🔄 Flowchart
+
+```mermaid
+flowchart TD
+A[Start] --> B[Menu]
+B --> C{Choice}
+
+C -->|Add| D[Enter Student Data] --> B
+C -->|Remove| E[Enter ID] --> B
+C -->|Search| F[Enter ID] --> G[Show Result] --> B
+C -->|Display| H[Show All Students] --> B
+C -->|Enroll| I[Enter ID & Course] --> B
+C -->|Exit| J[End]
+```
 
 ---
 
 ## 🧠 OOP Concepts Used
 
-- **Inheritance** → `Student` inherits from `Person`
-- **Encapsulation** → Controlled access using getters
-- **Abstraction** → Separation of logic into classes
-- **STL Usage** → `vector`, `set`, `algorithm`
+* **Inheritance** → `Student` inherits from `Person`
+* **Encapsulation** → Controlled access via methods
+* **Abstraction** → Separation of logic into classes
+* **STL Usage** → `vector`, `set`, `algorithm`
 
 ---
 
 ## ⚙️ Features
 
 ### ✅ Add Student
-- Input: ID, Name, GPA
-- GPA validation (must be between 0 and 4)
+
+* Input: ID, Name, GPA
+* GPA validation (0–4)
 
 ### ✅ Remove Student
-- Removes student using ID
+
+* Remove student using ID
 
 ### ✅ Search Student
-- Finds and displays student details
+
+* Display student details
 
 ### ✅ Display All Students
-- Prints all stored students
+
+* Loop through and print all students
 
 ### ✅ Enroll Course
-- Adds course to student using `set` (no duplicates)
+
+* Add course using `set` (no duplicates)
 
 ### ✅ Show Courses
-- Displays all courses of a student
+
+* Display all enrolled courses
 
 ### ✅ Sort Students
-- Sorts students by GPA (descending)
+
+* Sort by GPA (descending)
 
 ---
-
-## 🧩 Classes
-
-### 🔹 Person Class
-```cpp
-class Person {
-protected:
-    string name;
-
-public:
-    Person(string n);
-    string getName();
-};
-````
-
----
-
-### 🔹 Student Class
-
-```cpp
-class Student : public Person {
-private:
-    int id;
-    double gpa;
-    set<string> courses;
-
-public:
-    Student(int i, string n, double g);
-    int getId();
-    double getGpa();
-    void addCourse(string course);
-    void showCourses();
-    void display();
-};
-```
-<img width="3593" height="2157" alt="image" src="https://github.com/user-attachments/assets/93b43b51-43da-47c5-909f-a8020ffd26c3" />
-
----
-<img width="3278" height="2364" alt="image" src="https://github.com/user-attachments/assets/a21a51a3-58e5-49d7-8334-7ab61c896e0e" />
-
 
 ## 🔍 Implementation Details
 
@@ -115,8 +125,6 @@ vector<Student> students;
 ```
 
 ### 📌 Searching
-
-* Linear search using:
 
 ```cpp
 Student* findStudent(int id);
@@ -132,7 +140,7 @@ sort(students.begin(), students.end(), [](Student a, Student b) {
 
 ### 📌 Course Storage
 
-* Uses `set<string>` to prevent duplicates
+* `set<string>` ensures no duplicate courses
 
 ---
 
@@ -169,20 +177,20 @@ g++ main.cpp Student.cpp Person.cpp -o app
 
 ## ⚠️ Limitations
 
-* No database or file storage (data is temporary)
+* No database (data is lost after program ends)
 * Name input does not support spaces
-* Linear search is not efficient for large data
+* Linear search (not optimal for large data)
 
 ---
 
 ## 🚀 Future Improvements
 
-* Add file/database storage
-* Support full names (`getline`)
-* Replace vector with `map` for faster search
+* Add database integration (MongoDB / MySQL)
+* Support full names using `getline`
+* Use `map` for faster searching
 * Build GUI or Web version
 * Add authentication system
-* Add course grades & credit hours
+* Add course grades and credits
 
 ---
 
@@ -191,9 +199,7 @@ g++ main.cpp Student.cpp Person.cpp -o app
 **Rabea Shaban**
 Frontend Developer (React.js | Next.js | TypeScript)
 
-* 🌐 Portfolio: [https://rabea-shaban.com](https://rabea-shaban.com)
-* 💼 LinkedIn: [https://www.linkedin.com/in/rabea-sh-elzayat](https://www.linkedin.com/in/rabea-sh-elzayat)
-* 🐙 GitHub: [https://github.com/rabea-shaban](https://github.com/rabea-shaban)
-
----
+* 🌐 [https://rabea-shaban.com](https://rabea-shaban.com)
+* 💼 [https://www.linkedin.com/in/rabea-sh-elzayat](https://www.linkedin.com/in/rabea-sh-elzayat)
+* 🐙 [https://github.com/rabea-shaban](https://github.com/rabea-shaban)
 
