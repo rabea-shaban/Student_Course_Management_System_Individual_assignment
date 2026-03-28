@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Student_Course_Management_System_Individual_assignment/Student_Course_Management_System_Individual_assignment.vcxproj" />
+  <Project Path="Student_Course_Management_System_Individual_assignment/Student_Course_Management_System_Individual_assignment.vcxproj" Id="690b6afe-dd90-4e74-9d0b-945eae732e27" />
 </Solution>

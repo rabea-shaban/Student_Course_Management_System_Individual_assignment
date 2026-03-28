@@ -26,7 +26,7 @@ void addStudent() {
     cout << "Enter Name: ";
     cin >> name;
 
-    cout << "Enter GPA: ";
+    cout << "Enter GPA (0 - 4): ";
     cin >> gpa;
 
     if (gpa < 0 || gpa > 4) {
@@ -35,17 +35,18 @@ void addStudent() {
     }
 
     students.push_back(Student(id, name, gpa));
-    cout << "Added Done\n";
+    cout << "Student added successfully.\n";
 }
 
 void removeStudent() {
     int id;
-    cin >> id;
+    cout << "Enter Student ID to remove: ";
+        cin >> id;
 
     for (auto it = students.begin(); it != students.end(); it++) {
         if (it->getId() == id) {
             students.erase(it);
-            cout << "Removed Done \n";
+            cout << "Student removed successfully.\n";
             return;
         }
     }
@@ -56,7 +57,7 @@ void removeStudent() {
 void enrollCourse() {
     int id;
     string course;
-    cout << "Enter Courses id : ";
+    cout << "Enter Student ID to enroll in a course: ";
 
     cin >> id;
 
@@ -73,7 +74,7 @@ void enrollCourse() {
 
 void showCourses() {
     int id;
-    cout << "Enter Show Courses id : ";
+    cout << "Enter Student ID to show courses: ";
 
     cin >> id;
 
@@ -88,7 +89,13 @@ void showCourses() {
 }
 
 void displayAll() {
-    for (auto s : students) {
+    if (students.empty()) {
+        cout << "No students available.\n";
+        return;
+    }
+
+    cout << "\n=== Students List ===\n";
+    for (auto& s : students) {
         s.display();
     }
 }
@@ -97,20 +104,35 @@ void sortStudents() {
     sort(students.begin(), students.end(), [](Student a, Student b) {
         return a.getGpa() > b.getGpa();
         });
+    cout << "Students sorted by GPA (Descending).\n";
+
 }
 
 int main() {
     int choice;
 
     while (true) {
-        cout << "\n1.Add\n2.Remove\n3.Search\n4.Display\n5.Enroll\n6.Show Courses\n7.Sort\n8.Exit\n";
+        cout << "\n========== MENU ==========\n";
+        cout << "1. Add Student\n";
+        cout << "2. Remove Student\n";
+        cout << "3. Search Student\n";
+        cout << "4. Display All Students\n";
+        cout << "5. Enroll in Course\n";
+        cout << "6. Show Courses\n";
+        cout << "7. Sort Students\n";
+        cout << "8. Exit\n";
+        cout << "Enter your choice: ";
+
+
         cin >> choice;
 
         switch (choice) {
-        case 1: addStudent(); break;
-        case 2: removeStudent(); break;
+        case 1: addStudent(); displayAll(); break;
+        case 2: removeStudent(); displayAll(); break;
         case 3: {
             int id;
+            cout << "Enter Student ID to search: ";
+
             cin >> id;
             Student* s = findStudent(id);
             if (s) s->display();
@@ -120,7 +142,7 @@ int main() {
         case 4: displayAll(); break;
         case 5: enrollCourse(); break;
         case 6: showCourses(); break;
-        case 7: sortStudents(); break;
+        case 7: sortStudents(); displayAll(); break;
         case 8: return 0;
         default: cout << "Invalid \n";
         }
